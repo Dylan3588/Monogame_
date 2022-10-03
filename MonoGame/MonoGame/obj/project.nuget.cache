@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "2X0e8rjLJ3e1lWLrNlrw5+KouuUbEszJJRNyGir9FNjMA9pQfucSWIRIWfGVF+GrKBbEOTiFPBDIi6J3vgo/1A==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Dylan\\OneDrive - ROC van Twente\\leerjaar 3 roc\\Monogame_\\MonoGame\\MonoGame\\MonoGame.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Dylan\\.nuget\\packages\\monogame.content.builder.task\\3.8.1.303\\monogame.content.builder.task.3.8.1.303.nupkg.sha512",
+    "C:\\Users\\Dylan\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.1.303\\monogame.framework.desktopgl.3.8.1.303.nupkg.sha512"
+  ],
+  "logs": []
+}
