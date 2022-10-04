@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Assigment1;
+using System.Collections.Generic;
 
 namespace MonoGame
 {
@@ -8,7 +10,7 @@ namespace MonoGame
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-
+        List<GameObject> gameObjects = new List<GameObject>();
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -26,26 +28,34 @@ namespace MonoGame
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
             // TODO: use this.Content to load your game content here
+            gameObjects.Add(new Assigment1.PlayerIndex(new Vector2(100, 100), Content.Load<Texture2D>("Sprites/Knight"), Color.White));
         }
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (GamePad.GetState(Microsoft.Xna.Framework.PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
             // TODO: Add your update logic here
+            foreach (GameObject gameObject in gameObjects)
+            {
+                gameObject.Update();
+            }
 
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
+            GraphicsDevice.Clear(Color.Green);
             // TODO: Add your drawing code here
-
+            _spriteBatch.Begin();
+            foreach (GameObject gameObject in gameObjects)
+            {
+                gameObject.Draw(_spriteBatch);
+            }
+            _spriteBatch.End();
             base.Draw(gameTime);
         }
     }
