@@ -9,50 +9,56 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MonoGame.Assigment1
 {
-    internal class PlayerIndex : GameObject
+    internal class Player : GameObject
     {
         // speed of the player
-        private float speed = 30f;
-        // position of the player
-     
-        
+        private float speed = 5f;
+        protected Rectangle playerCollider;
+    
+
         public override void Update()
         {
-            base.Update();
             Move();
+            base.Update();
         }
         public override void Draw(SpriteBatch batch)
         {
             base.Draw(batch);
         }
-        public player(Vector2 pPosition, Texture2D pTexture, Color pColor)
+        public Player(Vector2 pPosition, Texture2D pTexture, Color pColor) : base(pPosition, pTexture, pColor)
         {
- 
-        }
-        
-
+            playerCollider = new Rectangle((int)pPosition.X, (int)pPosition.Y, _texture.Width, _texture.Height);
+        }       
 
         public void Move()
         {
+            Vector2 direction = Vector2.Zero;
+            
             // left movement
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                _position.X -= speed;
+                direction.X -= speed;
             }
             // right movement
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                _position.X += speed;
+                direction.X += speed;
             }
             // up movement
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
-                _position.Y -= speed;
+                direction.Y -= speed;
             }
             // down movement
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                _position.Y += speed;
+                direction.Y += speed;
+            }
+
+            if (direction != Vector2.Zero)
+            {
+                direction.Normalize();
+                _position += direction * speed;
             }
         }
     }

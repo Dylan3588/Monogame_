@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+
 namespace MonoGame.Assigment1
 {
     internal class GameObject
@@ -14,6 +15,7 @@ namespace MonoGame.Assigment1
         protected Texture2D _texture;
         protected Vector2 _position;
         protected Color _color;
+        protected string _name;
 
         public virtual void Update()
         {
@@ -25,9 +27,11 @@ namespace MonoGame.Assigment1
         {
             spriteBatch.Draw(_texture, _position, Color.White);
         }
-        public GameObject(Vector2 pPosition)
+        public GameObject(Vector2 pPosition, Texture2D pTexture, Color pColor)
         {
-
+            this._position = pPosition;
+            this._texture = pTexture;
+            this._color = pColor;
         }
     }
 }
