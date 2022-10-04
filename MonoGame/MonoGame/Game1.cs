@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.Assigment1;
 using System.Collections.Generic;
 
+
 namespace MonoGame
 {
     public class Game1 : Game
@@ -24,12 +25,15 @@ namespace MonoGame
 
             base.Initialize();
         }
-
+        
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             // TODO: use this.Content to load your game content here
-            gameObjects.Add(new Assigment1.PlayerIndex(new Vector2(100, 100), Content.Load<Texture2D>("Sprites/Knight"), Color.White));
+            gameObjects.Add(new Player(new Vector2(200, 200), Content.Load<Texture2D>("Sprites/Knight"), Color.White));
+            gameObjects.Add(new Weapon(new Vector2(100, 100), Content.Load<Texture2D>("Sprites/Weapon"), Color.White));
+            gameObjects.Add(new Shield(new Vector2(700, 350), Content.Load<Texture2D>("Sprites/Shield"), Color.White));
+            gameObjects.Add(new Gate(new Vector2(700, 50), Content.Load<Texture2D>("Sprites/Gate"), Color.White));
         }
 
         protected override void Update(GameTime gameTime)
