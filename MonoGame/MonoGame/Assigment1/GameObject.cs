@@ -16,6 +16,7 @@ namespace MonoGame.Assigment1
         protected Vector2 _position;
         protected Color _color;
         protected string _name;
+     
 
         public virtual void Update()
         {

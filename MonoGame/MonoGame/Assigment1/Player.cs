@@ -14,21 +14,27 @@ namespace MonoGame.Assigment1
         // speed of the player
         private float speed = 5f;
         protected Rectangle playerCollider;
-    
+        Game1 game1;
 
+        public Rectangle PlayerCollider
+        {
+            get { return playerCollider; }
+        }
         public override void Update()
         {
             Move();
+            UpdateCollider();
             base.Update();
         }
         public override void Draw(SpriteBatch batch)
         {
             base.Draw(batch);
         }
-        public Player(Vector2 pPosition, Texture2D pTexture, Color pColor) : base(pPosition, pTexture, pColor)
+        public Player(Vector2 pPosition, Texture2D pTexture, Color pColor, Game1 pGame1) : base(pPosition, pTexture, pColor)
         {
             playerCollider = new Rectangle((int)pPosition.X, (int)pPosition.Y, _texture.Width, _texture.Height);
-        }       
+            game1 = pGame1;
+        }
 
         public void Move()
         {
@@ -60,6 +66,11 @@ namespace MonoGame.Assigment1
                 direction.Normalize();
                 _position += direction * speed;
             }
+        }
+
+        public void UpdateCollider()
+        {
+            playerCollider = new Rectangle((int)_position.X, (int)_position.Y, _texture.Width, _texture.Height);
         }
     }
 }

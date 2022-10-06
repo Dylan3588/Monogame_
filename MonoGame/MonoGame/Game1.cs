@@ -12,6 +12,14 @@ namespace MonoGame
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         List<GameObject> gameObjects = new List<GameObject>();
+        protected Texture2D knight;
+        Texture2D gate;
+        Texture2D shield;
+        Texture2D knightShield;
+        Texture2D knightWeapon;
+        Texture2D weapon;
+        Texture2D knightShieldWeapon;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -22,7 +30,13 @@ namespace MonoGame
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            knight = Content.Load<Texture2D>("Sprites/knight");
+            weapon = Content.Load<Texture2D>("Sprites/weapon");
+            shield = Content.Load<Texture2D>("Sprites/shield");
+            gate = Content.Load<Texture2D>("Sprites/gate");
+            knightShield = Content.Load<Texture2D>("Sprites/knightShield");
+            knightWeapon = Content.Load<Texture2D>("Sprites/knightWeapon");
+            knightShieldWeapon = Content.Load<Texture2D>("Sprites/knightWeaponShield");
             base.Initialize();
         }
         
@@ -30,10 +44,10 @@ namespace MonoGame
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             // TODO: use this.Content to load your game content here
-            gameObjects.Add(new Player(new Vector2(200, 200), Content.Load<Texture2D>("Sprites/Knight"), Color.White));
-            gameObjects.Add(new Weapon(new Vector2(100, 100), Content.Load<Texture2D>("Sprites/Weapon"), Color.White));
-            gameObjects.Add(new Shield(new Vector2(700, 350), Content.Load<Texture2D>("Sprites/Shield"), Color.White));
-            gameObjects.Add(new Gate(new Vector2(700, 50), Content.Load<Texture2D>("Sprites/Gate"), Color.White));
+            gameObjects.Add(new Player(new Vector2(200, 200), knight, Color.White, this));
+            gameObjects.Add(new Weapon(new Vector2(100, 100), weapon, Color.White));
+            gameObjects.Add(new Shield(new Vector2(700, 350), shield, Color.White));
+            gameObjects.Add(new Gate(new Vector2(700, 50), gate, Color.White, this, Rectangle.Empty, (Player)gameObjects[0]));
         }
 
         protected override void Update(GameTime gameTime)
