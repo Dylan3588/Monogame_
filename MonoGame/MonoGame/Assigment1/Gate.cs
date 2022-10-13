@@ -11,24 +11,30 @@ namespace MonoGame.Assigment1
 {
     internal class Gate : GameObject
     {
+        // variable for gate class
         Game1 game1;
-        Rectangle collider;
+        Rectangle gateCollider;
         Player player;
-        public Gate(Vector2 pPosition, Texture2D pTexture, Color pColor, Game1 pGame1, Rectangle pCollider, Player pPlayer) : base(pPosition, pTexture, pColor)
+
+        // constructor for gate class
+        public Gate(Vector2 pPosition, Texture2D pTexture, Color pColor, Game1 pGame1, Player pPlayer) : base(pPosition, pTexture, pColor)
         {
-            collider = new Rectangle((int)pPosition.X, (int)pPosition.Y, _texture.Width, _texture.Height);
+            gateCollider = new Rectangle((int)pPosition.X, (int)pPosition.Y, _texture.Width, _texture.Height);
             game1 = pGame1;
             player = pPlayer;
         }
+
+        // override method for update
         public override void Update()
         {
             Collider();
             base.Update();
         }
 
+        // collider to check for interecting with gatesw
         public void Collider()
         {
-            if (player.PlayerCollider.Intersects(collider))
+            if (player.PlayerCollider.Intersects(gateCollider))
             {
                 game1.Exit();
             }

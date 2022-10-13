@@ -9,16 +9,40 @@ namespace MonoGame
 {
     public class Game1 : Game
     {
+        // Graphics
         private GraphicsDeviceManager _graphics;
+        // spritebatch
         private SpriteBatch _spriteBatch;
-        List<GameObject> gameObjects = new List<GameObject>();
+        public List<GameObject> gameObjects = new List<GameObject>();
+
+        
+        // all textures used in the game
         protected Texture2D knight;
-        Texture2D gate;
-        Texture2D shield;
-        Texture2D knightShield;
-        Texture2D knightWeapon;
-        Texture2D weapon;
-        Texture2D knightShieldWeapon;
+        protected Texture2D gate;
+        protected Texture2D shield;
+        protected Texture2D knightShield;
+        protected Texture2D knightWeapon;
+        protected Texture2D weapon;
+        protected Texture2D knightShieldWeapon;
+
+        // Textures used to get it to other classes
+        public Texture2D KnightShield
+        {
+            get { return knightShield; }
+            set { knightShield = value; }
+        }
+
+        public Texture2D KnightWeapon
+        {
+            get { return knightWeapon; }
+            set { knightWeapon = value; }
+        }
+
+        public Texture2D KnightShieldWeapon
+        {
+            get { return knightShieldWeapon; }
+            set { knightShieldWeapon = value; }
+        }
 
         public Game1()
         {
@@ -29,7 +53,7 @@ namespace MonoGame
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            // load all textures
             knight = Content.Load<Texture2D>("Sprites/knight");
             weapon = Content.Load<Texture2D>("Sprites/weapon");
             shield = Content.Load<Texture2D>("Sprites/shield");
@@ -43,23 +67,27 @@ namespace MonoGame
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            // TODO: use this.Content to load your game content here
-            gameObjects.Add(new Player(new Vector2(200, 200), knight, Color.White, this));
-            gameObjects.Add(new Weapon(new Vector2(100, 100), weapon, Color.White));
-            gameObjects.Add(new Shield(new Vector2(700, 350), shield, Color.White));
-            gameObjects.Add(new Gate(new Vector2(700, 50), gate, Color.White, this, Rectangle.Empty, (Player)gameObjects[0]));
+            // add all textures to the game 
+            Player player = new Player(new Vector2(200, 200), knight, Color.White, this);
+            //player.LoadContent(Content);
+            
+            gameObjects.Add(player);
+            gameObjects.Add(new Weapon(new Vector2(100, 100), weapon, Color.White, this, player));
+            gameObjects.Add(new Shield(new Vector2(700, 350), shield, Color.White, this, player));
+            gameObjects.Add(new Gate(new Vector2(700, 50), gate, Color.White, this, player));
         }
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(Microsoft.Xna.Framework.PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
-            foreach (GameObject gameObject in gameObjects)
+
+            for (int i = 0; i < gameObjects.Count; i++)
             {
-                gameObject.Update();
+                gameObjects[i].Update();
             }
+            // TODO: Add your update logic here
 
             base.Update(gameTime);
         }
@@ -69,9 +97,9 @@ namespace MonoGame
             GraphicsDevice.Clear(Color.Green);
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
-            foreach (GameObject gameObject in gameObjects)
+            for (int i = 0; i < gameObjects.Count; i++)
             {
-                gameObject.Draw(_spriteBatch);
+                gameObjects[i].Draw(_spriteBatch);
             }
             _spriteBatch.End();
             base.Draw(gameTime);

@@ -9,30 +9,36 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MonoGame.Assigment1
 {
-    internal class GameObject
+    public class GameObject
     {
         // texture
         protected Texture2D _texture;
         protected Vector2 _position;
         protected Color _color;
-        protected string _name;
      
+        // constructor for the gameobject
+        public GameObject(Vector2 pPosition, Texture2D pTexture, Color pColor)
+        {
+            _position = pPosition;
+            _texture = pTexture;
+            _color = pColor;
+        }
+
+        public GameObject(Vector2 pPosition, Texture2D pTexture)
+        {
+            _position = pPosition;
+            _texture = pTexture;
+            _color = Color.White;
+        }
 
         public virtual void Update()
         {
-          
         }
 
-
+        // constructor for drawing the texture
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(_texture, _position, Color.White);
-        }
-        public GameObject(Vector2 pPosition, Texture2D pTexture, Color pColor)
-        {
-            this._position = pPosition;
-            this._texture = pTexture;
-            this._color = pColor;
         }
     }
 }
